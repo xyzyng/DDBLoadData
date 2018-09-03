@@ -33,7 +33,7 @@ public class DDBLoadData {
     private boolean saveToDisk;                                     // flag to control save data to local disk
     private long totalSentDataSize = 0L;                            // total generated and loaded data
     private long totalSentItemsNum = 0L;                            // total generated and loaded items number
-    private DynamoDB dynamoDB = null;
+
 
     private ArrayList<ddbPrepareDataJobRunnable> jobListPrepareData = new ArrayList<ddbPrepareDataJobRunnable>();  // job list for generate and load data
 
@@ -46,7 +46,7 @@ public class DDBLoadData {
         this.numThread = numThread;
         this.totalDataSize = 1024L * 1024L * numMB;
         this.saveToDisk = saveToDisk;
-        dynamoDB = new DynamoDB(Regions.AP_SOUTHEAST_2);
+
     }
 
     // random int number for customer id
@@ -157,7 +157,7 @@ public class DDBLoadData {
         private int customerIDUpperRange;       // customer id higher range
         private long threadSentDataSize = 0L;   // process data size in this thread
         private long threadSentItemsNum = 0L;   // process items number in this thread
-
+        private DynamoDB dynamoDB = null;
         final static int BATCH_WRITE_NUMBER = 24;   // DDB batch write size
 
         // swich to stop the thread
@@ -170,6 +170,7 @@ public class DDBLoadData {
             this.fileName = filePrefix + Integer.toString(threadID);
             this.customerIDLowerRange = threadID * 10000000;
             this.customerIDUpperRange = this.customerIDLowerRange + 10000000;
+            dynamoDB = new DynamoDB(Regions.AP_SOUTHEAST_2);
         }
 
         // getter of processed data size in this thread
