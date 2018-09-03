@@ -38,7 +38,7 @@
             <configuration>
                 <archive>
                     <manifest>
-                        <mainClass>app.App</mainClass>
+                        <mainClass>app.DDBLoadData</mainClass>
                     </manifest>
                 </archive>
                 <descriptorRefs>
